@@ -1,25 +1,9 @@
 import yfinance as yf
 
-# 获取数据
-vix = yf.download("^VIX", period="5d")["Close"].iloc[-1]
-spy = yf.download("SPY", period="1y")["Close"]
+spy = yf.download("SPY", period="5d")
 
-ma50 = spy.rolling(50).mean().iloc[-1]
-ma200 = spy.rolling(200).mean().iloc[-1]
-price = spy.iloc[-1]
+print("DATAFRAME:")
+print(spy)
 
-# 打印数据
-print("VIX:", vix)
-print("SPY Price:", price)
-print("MA50:", ma50)
-print("MA200:", ma200)
-
-# 条件1：VIX
-if vix > 30:
-    print("⚠️ VIX > 30")
-
-# 条件2：均线
-if ma50 > ma200:
-    print("📈 Golden Cross (50 > 200)")
-else:
-    print("📉 Death Cross (50 < 200)")
+print("COLUMNS:", spy.columns)
+print("SHAPE:", spy.shape)
